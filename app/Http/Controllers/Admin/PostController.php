@@ -77,12 +77,15 @@ class PostController extends Controller
 
         //ddd($data);
 
-        $img_path = Storage::put('uploads', $data['uploaded_img']); //ricorda di fare il chmod 777 alla cartella storage/app/public
+        //ricorda di fare il chmod 777 alla cartella storage/app/public
+        //$img_path = Storage::put('uploads', $data['uploaded_img']);
+        $img_path = isset($data['uploaded_img']) ? Storage::put('uploads', $data['uploaded_img']) : null;
 
         // salvare i dati nel db
         $post = new Post();
-        $post->slug         = $data['slug'];
         $post->title        = $data['title'];
+        $post->slug         = $data['slug'];
+        $post->category_id        = $data['category_id'];
         $post->image        = $data['image'];
         $post->uploaded_img = $img_path;
         $post->content      = $data['content'];

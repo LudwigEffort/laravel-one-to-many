@@ -29,4 +29,5 @@ Route::middleware('auth') //approfondire il middleware
     ->group(function(){
         Route::get('/', 'PageController@dashboard')->name('dashboard');
         Route::resource('posts', 'PostController');
+        Route::resource('categories', 'CategoryController');
     });

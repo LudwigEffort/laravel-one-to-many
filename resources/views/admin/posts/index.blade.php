@@ -14,7 +14,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Title</th>
-                <th scope="col">Azioni</th>
+                <th scope="col">Category</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                     <th scope="row">{{ $post->id }}</th>
                     <td>{{ $post->slug }}</td>
                     <td>{{ $post->title }}</td>
+                    <td>
+                        {{-- <a href="{{ route('admin.posts.edit', ['post' => $post]) }}" class="btn btn-warning">Edit</a> --}}
+                        {{ $post->category->name }}
+                    </td>
                     <td>
                         <a href="{{ route('admin.posts.show', ['post' => $post]) }}" class="btn btn-primary">Show</a>
                     </td>

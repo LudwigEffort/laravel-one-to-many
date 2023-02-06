@@ -1,8 +1,8 @@
 <?php
 
-use App\Category;
 use App\Post;
-//use Illuminate\Support\Str;
+use App\Category;
+use Illuminate\Http\File;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +18,21 @@ class PostSeeder extends Seeder
     {
         $categories = Category::all('id')->all(); // con qusta stringa selezioniamo gli id delle categorie dal db
 
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 1000; $i++) {
             $title = $faker->words(rand(3, 7), true);
+
+            // $number = rand(0, 276);
+            // if ($number) {
+
+            //     $contents = new File(__DIR__ . '/../../storage/app/lorempicsum' . $number . '.jpg');
+
+            //     $img_paht = Storage::put('uploads');
+
+            // } else {
+            //     $img_paht = null;
+            // }
+
+
             //$loremImages = Storage::files('lorempicsum');
             //$img_path = Storage::put('uploads', $faker->randomElement($loremImages)); //TODO: risolvere il problema dei permessi delle img
 

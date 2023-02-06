@@ -13,4 +13,9 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
 
+    //per usare nei link lo slug anzichè l'id
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

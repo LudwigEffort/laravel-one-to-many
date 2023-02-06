@@ -49,7 +49,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', compact('category'));
+        $posts = $category->posts()->paginate(6); // in questo modo abbiamo spostato la query dentro il controller, ricorda $category e posts sono collegati dalla relazone one to many
+
+        return view('admin.categories.show', [
+            'category' => $category,
+            'posts'    => $posts,
+        ]);
     }
 
     /**

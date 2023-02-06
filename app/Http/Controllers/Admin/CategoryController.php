@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -38,7 +39,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validare
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'slug' => 'required|string|max:100|unique:categories',
+            'description' => 'nullable|string',
+        ]);
+
+        $data = $request->all();
+
+        // salvare
+        $category = new Category;
+        $category->name         = $data['name'];
+        $category->slug         = $data['slug'];
+        $category->description  = $data['description'];
+        $category->save();
+
+        // ridirezionare
+        return redirect()->route('admin.categories.show', ['category' => $category]);
     }
 
     /**
@@ -65,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -77,7 +95,28 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // validare
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'slug' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('categories')->ignore($category),
+            ],
+            'description' => 'nullable|string',
+        ]);
+
+        $data = $request->all();
+
+        // aggiornare la riga nel db
+        $category->name         = $data['name'];
+        $category->slug         = $data['slug'];
+        $category->description  = $data['description'];
+        $category->update();
+
+        // ridirezionare
+        return redirect()->route('admin.categories.show', ['category' => $category]);
     }
 
     /**

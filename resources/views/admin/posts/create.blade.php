@@ -42,7 +42,6 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required aria-label="select example">
-                <option value="">Open this select menu</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

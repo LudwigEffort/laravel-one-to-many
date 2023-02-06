@@ -15,16 +15,17 @@ class PostController extends Controller
     // 'slug' => 'required|string|max:100|unique:posts'
     // abbiamo trasformato lo slug in un array perché
     private $validations = [
-        'slug'    => [
+        'title'         => 'required|string|max:100',
+        'slug'          => [
             'required',
             'string',
             'max:100',
         ],
-        'title'   => 'required|string|max:100',
-        'image'   => 'string|max:100',
-        'uploaded_img' => 'image|max:1024',
-        'content' => 'string',
-        'excerpt' => 'string',
+        'category_id'   => 'required|integer|exists:categories,id',
+        'image'         => 'string|max:100',
+        'uploaded_img'  => 'image|max:1024',
+        'content'       => 'string',
+        'excerpt'       => 'string',
     ];
 
     /**
@@ -50,7 +51,7 @@ class PostController extends Controller
     {
         $categories = Category::all('id', 'name');
 
-        ddd($categories);
+        //ddd($categories);
 
         return view('admin.posts.create', [
             'categories'    => $categories,
@@ -66,6 +67,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        //dd($request->all());
+
         // validation
         $request->validate($this->validations);
 

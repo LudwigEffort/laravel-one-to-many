@@ -38,6 +38,28 @@
                 </div>
             </div>
 
+            {{-- select --}}
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Category</label>
+                <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required aria-label="select example">
+                <option value="">Open this select menu</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <div class="invalid-feedback">
+                    @error('category_id')
+                        <ul>
+                            @foreach ($errors->get('category_id') as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @enderror
+                </div>
+                <div class="invalid-feedback">Example invalid select feedback</div>
+            </div>
+
+
             {{-- image --}}
             <div class="mb-3">
                 <label for="image" class="form-label">URL-Image</label>

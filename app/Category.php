@@ -10,4 +10,9 @@ class Category extends Model
     use Slugger;
 
     public $timestamps = false; // serve per disattivare i timestamps comentati nella migration relativa
+
+    public function posts() {
+        return $this->hasMany('App\Post');
+    }
+
 }

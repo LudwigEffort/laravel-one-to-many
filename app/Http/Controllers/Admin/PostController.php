@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -47,7 +48,14 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all('id', 'name');
+
+        ddd($categories);
+
+        return view('admin.posts.create', [
+            'categories'    => $categories,
+        ]);
+
     }
 
     /**
@@ -63,7 +71,7 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        //dd($data);
+        //ddd($data);
 
         $img_path = Storage::put('uploads', $data['uploaded_img']); //ricorda di fare il chmod 777 alla cartella storage/app/public
 

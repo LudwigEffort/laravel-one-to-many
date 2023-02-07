@@ -26,7 +26,7 @@
                     <td>{{ $post->title }}</td>
                     <td>
                         {{-- <a href="{{ route('admin.posts.edit', ['post' => $post]) }}" class="btn btn-warning">Edit</a> --}}
-                        {{ $post->category->name }}
+                        {{ $post->category->name ?? 'null' }}
                     </td>
                     <td>
                         <a href="{{ route('admin.posts.show', ['post' => $post]) }}" class="btn btn-primary">Show</a>

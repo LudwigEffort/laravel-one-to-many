@@ -127,6 +127,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // eliminare dal db la riga
+        $category->delete();
+
+        // ridirezionare
+        return redirect()->route('admin.categories.index')->with('success_delete', $category);
     }
 }

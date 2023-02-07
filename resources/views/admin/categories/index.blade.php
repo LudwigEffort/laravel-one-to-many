@@ -4,7 +4,7 @@
 <div class="container">
     @if (session('success_delete'))
         <div class="alert alert-warning" role="alert">
-            The category with id {{ session('success_delete')->id }} was delite!
+            The category with name "{{ session('success_delete')->name }}" was delite!
         </div>
     @endif
 
@@ -28,7 +28,7 @@
                     <td>
                         <a href="{{ route('admin.categories.show', ['category' => $category]) }}" class="btn btn-primary">Show</a>
                         <a href="{{ route('admin.categories.edit', ['category' => $category]) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.categories.destroy', ['category' => $category]) }}" method="category">
+                        <form action="{{ route('admin.categories.destroy', ['category' => $category]) }}" method="post">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger btn-delete-me">Delete</button>

@@ -16,12 +16,13 @@ class UpdatePostsTableAddCategoriesRalation extends Migration
         Schema::table('posts', function (Blueprint $table) {
 
             // crere la colonna della chiave esterna
-            $table->unsignedBigInteger('category_id')->after('id');
+            $table->unsignedBigInteger('category_id')->after('id')->nullable();
 
             // creare la relazione delle tabelle
             $table->foreign('category_id')
                     ->references('id')
-                    ->on('categories');
+                    ->on('categories')
+                    ->onDelete('set null');
 
         });
     }
